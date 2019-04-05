@@ -22,11 +22,13 @@ func main() {
 	world.Setup(10, 10)
 	world.Randomize()
 
+	fmt.Println("\033[2J")
 	reader := bufio.NewReader(os.Stdin)
 	print(world)
 
 	for {
 		reader.ReadString('\n')
+		fmt.Println("\033[2J")
 		world.Tick()
 		print(world)
 	}
