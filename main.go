@@ -1,7 +1,33 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+
+	"github.com/andersondias/conway-game-of-life-go/conway"
+)
+
+func print(w conway.World) {
+	for _, row := range w.Cells {
+		for _, cell := range row {
+			fmt.Print(cell)
+		}
+		fmt.Println()
+	}
+}
 
 func main() {
-  fmt.Println("Hello, world.")
+	world := conway.World{}
+	world.Setup(10, 10)
+	world.Randomize()
+
+	reader := bufio.NewReader(os.Stdin)
+	print(world)
+
+	for {
+		reader.ReadString('\n')
+		world.Tick()
+		print(world)
+	}
 }
